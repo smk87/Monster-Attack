@@ -17,12 +17,29 @@ new Vue({
         return;
       }
 
+      this.monsterAttack();
+    },
+    specialAttack() {
+      this.monsterHealth -= this.calculateDamage(10, 20);
+      if (this.checkWin()) {
+        return;
+      }
+
+      this.monsterAttack();
+    },
+    heal() {
+      if (this.playerHealth <= 90) {
+        this.playerHealth += 10;
+      } else {
+        this.playerHealth = 100;
+      }
+      this.monsterAttack();
+    },
+    giveUp() {},
+    monsterAttack() {
       this.playerHealth -= this.calculateDamage(5, 12);
       this.checkWin();
     },
-    specialAttack() {},
-    heal() {},
-    giveUp() {},
     calculateDamage(min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
     },
